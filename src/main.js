@@ -13,7 +13,7 @@ import './assets/tailwind.css'
 const config = {
   baseURL: process.env.VUE_APP_BASE_URL,
 }
-console.log(process.env.VUE_APP_BASE_URL)
+
 const api = axios.create(config)
 
 window.api = api

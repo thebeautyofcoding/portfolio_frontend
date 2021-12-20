@@ -112,9 +112,22 @@ const actions = {
     })
     commit('updateCurrentPortfolioCommentList', commentId)
     return res
-  }
-}
+  },
 
+  async send ({ commit, rootState }, data) {
+    console.log(data)
+    const token = `Bearer ${rootState.currentUser.currentUser.access_token}` ? `Bearer ${rootState.currentUser.currentUser.access_token}` : `Bearer ${localStorage.getItem('token')} `
+    const res = await window.api.post(`/portfolios`, data, {
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'multipart/form-data'
+
+      }
+    })
+
+    return res
+  },
+}
 export default {
   state, actions, mutations
 }

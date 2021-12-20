@@ -7,6 +7,9 @@ import Hero from '../components/Hero.vue'
 import PortfolioList from '../components/PortfolioList.vue'
 import Home from '../views/Home.vue'
 import Contact from '../components/Contact'
+import PortfolioUpload from '../components/PortfolioUpload'
+import SkillCardUpload from '../components/SkillCardUpload'
+import AboutMe from '../components/AboutMe'
 
 const routes = [
 
@@ -14,6 +17,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/about',
+    name: 'AboutMe',
+    component: AboutMe,
   },
   {
     path: '/login',
@@ -25,29 +33,32 @@ const routes = [
     path: '/projects',
     name: 'PortfolioList',
     component: PortfolioList,
-    meta: {
-      enterClass: 'animate__animated animate__fadeIn',
-      leaveClass: 'animate__animated animate__fadeOut'
-    }
+
+  },
+  {
+    path: '/projects/upload',
+    name: 'PortfolioUpload',
+    component: PortfolioUpload,
+
+  },
+  {
+    path: '/skills/upload',
+    name: 'SkillCardUpload',
+    component: SkillCardUpload,
+
   },
 
   {
     path: '/skills',
     name: 'SkillCardList',
     component: SkillCardList,
-    meta: {
-      enterClass: 'animate__animated animate__fadeIn',
-      leaveClass: 'animate__animated animate__fadeOut'
-    }
+
   },
   {
     path: '/contact',
     name: 'Contact',
     component: Contact,
-    meta: {
-      enterClass: 'animate__animated animate__fadeIn',
-      leaveClass: 'animate__animated animate__fadeOut'
-    }
+
   },
   {
     path: '/',

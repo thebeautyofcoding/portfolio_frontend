@@ -17,6 +17,20 @@ const actions = {
 
   },
 
+  async postSkill ({ commit, rootState }, data) {
+    const token = `Bearer ${rootState.currentUser.currentUser.access_token}` ? `Bearer ${rootState.currentUser.currentUser.access_token}` : `Bearer ${localStorage.getItem('token')} `
+    const res = await window.api.post(`/skillcards`, data, {
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'multipart/form-data'
+
+      }
+    })
+
+    return res
+
+  },
+
 }
 
 export default {

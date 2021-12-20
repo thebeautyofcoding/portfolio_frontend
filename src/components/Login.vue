@@ -46,6 +46,8 @@
                     />
                   </div>
                 </div>
+
+                <div class="text-red-500 mt-2">{{ error }}</div>
               </div>
 
               <div class="form-group">
@@ -56,9 +58,6 @@
                 >
                   Login
                 </button>
-              </div>
-              <div class="login-register">
-                <a href="index.php">Not registered yet?</a>
               </div>
             </form>
           </div>
@@ -74,15 +73,33 @@
       return {
         email: "",
         password: "",
+        error: "",
       };
+    },
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        console.log(from);
+        return (vm.prevRoute = from);
+      });
     },
     methods: {
       async login() {
-        const res = await this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password,
-        });
-        if ((res.status = 200)) this.$router.push("/");
+        const res = await this.$store
+          .dispatch("login", {
+            email: this.email,
+            password: this.password,
+          })
+          .catch((err) => {
+            this.error = err.response.data.message;
+          });
+
+        if (res && res.status === 200) {
+          if (this.prevRoute.path === "/projects") {
+            this.$router.push("/projects");
+          } else {
+            this.$router.push("/");
+          }
+        }
       },
     },
   };

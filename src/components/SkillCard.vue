@@ -1,5 +1,5 @@
 <template>
-  <div class="cardCustom my-5 w-full">
+  <div class="cardCustom mt-5 w-full">
     <div
       class="card__inner w-full relative"
       :class="clicked && id === skill.id ? 'is-flipped' : ''"
@@ -8,24 +8,27 @@
         class="
           card__face card__face--front
           w-full
-          flex
-          justify-content-center
-          align-items-center
-          p-2
+          flex flex-col
+          justify-content-start
         "
       >
-        <div
-          class="
-            text-bold text-2xl
-            z-10
-            text-white
-            flex
-            w-full
-            align-items-center
-            justify-content-center
-          "
-        >
-          {{ skill.title }}
+        <div class="flex flex-col w-full">
+          <div
+            class="
+              text-bold text-2xl
+              z-10
+              text-white
+              flex flex-col
+              align-items-center
+              bg-gray-400
+              w-full
+            "
+          >
+            {{ skill.title }}
+            <div class="flex align-items-center text-sm">
+              {{ skill.small_description }}
+            </div>
+          </div>
         </div>
         <div
           class="
@@ -35,23 +38,27 @@
             w-full
             h-full
             absolute
+            background-thumbnail
           "
         >
-          <img
+          <div class="text-black bg-black opacity-80 w-full h-full">
+            <!-- <img
             :src="background1(skill.background_image1)"
             class="flex bg-image object-cover h-full"
-          />
+          /> -->
+          </div>
         </div>
         <div
-          style="top: 74%"
+          style="top: 77%"
           class="
             absolute
             flex
             justify-content-center
             bg-gray-200
+            opacity-70
             w-full
             m-2
-            p-2
+            p-1
           "
         >
           <img
@@ -63,7 +70,7 @@
             class="top-20 left-20 z-1 w-20 h-20"
           />
           <img
-            :src="tech_stack3(skill.tech_stack_logos4)"
+            :src="tech_stack3(skill.tech_stack_logos3)"
             class="z-2 w-20 h-20"
           />
         </div>
@@ -97,9 +104,6 @@
     computed: {},
 
     methods: {
-      background1(background_image1) {
-        return `${process.env.VUE_APP_BASE_STATICS}${background_image1}`;
-      },
       tech_stack1(logo1) {
         return `${process.env.VUE_APP_BASE_STATICS}${logo1}`;
       },
@@ -131,7 +135,10 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-
+.background-thumbnail {
+  background: url("../assets/desktop.jpg");
+  background-size: fit-content;
+}
 .cardCustom {
   width: 40vw;
   height: 50vh;
@@ -151,7 +158,6 @@ body {
 .card__inner.is-flipped {
   transform: rotateY(180deg);
 }
-
 .card__face {
   position: absolute;
   width: 100%;
@@ -160,9 +166,9 @@ body {
   backface-visibility: hidden;
   overflow: hidden;
   border-radius: 16px;
+
   box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
 }
-
 .card__face--front {
   background-image: linear-gradient(
     to bottom right,
@@ -173,27 +179,22 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .card__face--front h2 {
   color: #fff;
   font-size: 32px;
 }
-
 .card__face--back {
   background-color: var(--light);
   transform: rotateY(180deg);
 }
-
 .card__content {
   width: 100%;
   height: 100%;
 }
-
 .card__header {
   position: relative;
   padding: 30px 30px 40px;
 }
-
 .card__header:after {
   content: "";
   display: block;
@@ -210,7 +211,6 @@ body {
   z-index: -1;
   border-radius: 0px 0px 50% 0px;
 }
-
 .card__header h2 {
   color: #fff;
   font-size: 32px;
@@ -222,14 +222,12 @@ body {
 .card__body {
   padding: 30px;
 }
-
 .card__body h3 {
   color: var(--dark);
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 15px;
 }
-
 .card__body p {
   color: var(--dark);
   font-size: 18px;

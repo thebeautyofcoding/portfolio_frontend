@@ -118,10 +118,12 @@
     },
     methods: {
       async onClick() {
+        this.errors = {};
         this.errors.email = null;
         this.errors.password = null;
         this.errors.username = null;
         this.errors.confirmPassword = null;
+        this.errors.usernameAlreadyExistent = null;
 
         this.errors.confirmPassword = null;
         this.submitted = false;
@@ -133,7 +135,8 @@
 
         const res = await this.$store.dispatch("register", data).catch((err) => {
           this.submitted = true;
-          this.errors = err.response.data.errors;
+
+          if (err.response) this.errors = err.response.data.errors;
         });
         if (this.user.password !== this.user.confirmPassword) {
           this.errors.confirmPassword = "Passwords do not match";

@@ -2,13 +2,19 @@
   <transition name="modal-animation">
     <div v-show="modalActive" class="modal shadow">
       <transition name="modal-animation-inner">
-        <div v-show="modalActive" class="modal-inner">
-          <i @click="close" class="far fa-times-circle"></i>
-          <!-- Modal Content -->
-          <slot />
-          <button @click="close" type="button" class="mt-2 rounded-lg">
-            Close
-          </button>
+        <div class="flex" :class="isProjectsRoute ? '' : 'align-items-center'">
+          <div
+            v-show="modalActive"
+            class="modal-inner relative"
+            :style="isProjectsRoute ? 'height: 180vh;' : '  height: 50vh;'"
+          >
+            <i @click="close" class="far fa-times-circle absolute top-0"></i>
+            <!-- Modal Content -->
+            <slot />
+            <button @click="close" type="button" class="mt-2 rounded-lg">
+              Close
+            </button>
+          </div>
         </div>
       </transition>
     </div>
@@ -17,14 +23,22 @@
 
 <script>
   import { useStore } from "vuex";
+  import { computed } from "vue";
+  import { useRoute } from "vue-router";
   export default {
     props: ["modalActive"],
     setup(props, { emit }) {
       const store = useStore();
+      const route = useRoute();
       const close = () => {
         store.commit("setShowPortfolioDialog", false);
       };
-      return { close };
+
+      const isProjectsRoute = computed(() => {
+        console.log(route);
+        return route.path === "/projects";
+      });
+      return { close, isProjectsRoute };
     },
   };
 </script>
@@ -54,8 +68,8 @@
 .modal {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-content: center;
+  height: 100%;
   width: 100vw;
   position: fixed;
   top: 5%;
@@ -63,9 +77,8 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 .modal-inner {
-  position: relative;
   max-width: 640px;
-  width: 80%;
+
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   background-color: #fff;

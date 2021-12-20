@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <section id="hero" class="absolute">
+    <section id="hero" class="top-0">
       <div class="hero container">
         <h1>Hello, ... <span></span></h1>
         <h1>my name is ... <span></span></h1>

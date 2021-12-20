@@ -1,13 +1,21 @@
 <template>
-  <div class="flex justify-center absolute flex-col align-items-center">
-    <div class="flex flex-col">
-      <div class="text-2xl font-bold flex w-full justify-center">Skills</div>
-      <span class="text-gray-600 text-sm">My current skills...</span>
+  <div class="flex justify-center flex-col align-items-center w-full">
+    <div class="flex w-full flex-col justify-center w-full">
+      <div class="text-2xl font-bold flex w-full justify-center">Projects</div>
+      <span class="text-gray-600 text-sm flex justify-center"
+        >My current FullStack-Projects...</span
+      >
     </div>
-    <ul class="w-full flex flex-row w-50">
-      <div class="flex w-50" v-if="!hideIfOpenModal">
+    <ul class="flex w-full vh-100">
+      <div class="flex flex-wrap justify-center" v-if="!hideIfOpenModal">
         <li
-          class="d-flex portfolio-list w-50"
+          style="
+            max-height: 400px;
+            max-width: 500px;
+            min-width: 300px;
+            min-height: 200px;
+          "
+          class="d-flex portfolio-list justify-center align-items-center"
           v-for="portfolio in portfolios"
           :key="portfolio.id"
           @click="onClick(portfolio.id)"
@@ -17,10 +25,13 @@
       </div>
     </ul>
     <modal @close="toggleModal" :modalActive="showModal" class="">
-      <div class="font-bold text-2xxl">My Frontend-Skills</div>
-      <img :src="imageLink" class="mt-80" />
+      <div class="font-bold text-2xxl">Details</div>
 
-      <div class="font-bold text-xl mb-2">{{ currentPortfolio.title }}</div>
+      <img :src="imageLink" class="" />
+
+      <div class="font-bold text-xl mb-2" style="word-break: break-word">
+        {{ currentPortfolio.title }}
+      </div>
       <div class="">{{ currentPortfolio.description }}</div>
       <div class="flex m-2">
         <div class="d-flex align-items-center mr-5">
@@ -42,10 +53,20 @@
           ></i>
         </div>
       </div>
-      <div class="">
-        <ul class="flex flex-column max-h-40 overflow-auto">
+      <div class="w-full flex">
+        <ul
+          class="
+            flex flex-col
+            justify-center
+            align-items-center
+            w-full
+            h-40
+            overflow-auto
+          "
+          style="overflow-x: hidden"
+        >
           <li
-            class="rounded m-2 shadow-sm bg-gray-200 flex flex-column p-1"
+            class="rounded w-100 m-2 shadow-sm bg-gray-200 flex flex-column p-1"
             v-for="comment in currentPortfolio.comments"
             :key="comment.id"
           >
@@ -98,8 +119,15 @@
       </div>
       <div v-else>
         <div class="text-xl text-bold my-3">
-          Please login or register to like this portfolio project or to leave a
-          comment.
+          Please
+          <router-link to="/login"
+            ><span class="text-red-400">login</span></router-link
+          >
+          or
+          <router-link to="/register"
+            ><span class="text-red-400">register</span></router-link
+          >
+          to like this portfolio project or to leave a comment.
         </div>
       </div>
     </modal>
@@ -126,7 +154,8 @@
 
       imageLink() {
         return (
-          process.env.VUE_APP_BASE_STATICS + this.currentPortfolio.thumbnail_path
+          process.env.VUE_APP_BASE_STATICS +
+          this.currentPortfolio.background_image1
         );
       },
 
@@ -159,7 +188,6 @@
         const data = { id, description: this.description };
 
         await this.$store.dispatch("postComment", data);
-        description.value = "";
       },
       async dislike(portfolioId) {
         await this.$store.dispatch("dislikeOrUnlike", portfolioId);
@@ -183,6 +211,5 @@ ul {
   list-style-type: none;
 }
 .portfolio-list {
-  min-width: 100%;
 }
 </style>

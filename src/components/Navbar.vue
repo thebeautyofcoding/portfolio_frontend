@@ -20,6 +20,7 @@
             <router-link to="/skills" class="sidemenu__item"
               >Skills</router-link
             >
+            <router-link to="/about" class="sidemenu__item">About</router-link>
             <router-link to="/contact" class="sidemenu__item"
               >Contact</router-link
             >
@@ -39,6 +40,7 @@
         <router-link to="/projects" class="">Projects</router-link>
         <router-link to="/skills" class="">Skills</router-link>
         <router-link to="/contact" class="">Contact</router-link>
+        <router-link to="/about" class="">About</router-link>
       </ul>
     </div>
   </nav>

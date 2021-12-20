@@ -1,6 +1,6 @@
 <template>
-  <div class="absolute w-full">
-    <div class="contact justify-content-evenly flex flex-col">
+  <div class="w-full vh-100" id="contact">
+    <div class="contact justify-content-evenly flex flex-col h-full">
       <div>
         <h1 class="section-title font-bold text-2xl justify-center flex mb-3">
           Contact Info

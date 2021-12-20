@@ -16,9 +16,12 @@ const mutations = {
 
 const actions = {
   async register ({ commit }, data) {
-    console.log(window.api)
-    const res = await window.api.post('/register', data)
 
+    const res = await window.api.post('/register', data)
+    commit('setCurrentUser', res.data.user)
+    commit('setAccessToken', res.data.access_token)
+    localStorage.setItem('user', JSON.stringify(res.data.user))
+    localStorage.setItem('token', res.data.access_token)
     return res
 
   },

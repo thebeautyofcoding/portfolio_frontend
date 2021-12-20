@@ -1,10 +1,13 @@
 <template>
-  <div class="flex justify-center">
-    <div class="flex flex-col">
+  <div class="flex flex-col justify-center w-full h-full">
+    <div class="flex flex-col align-items-center">
       <div class="text-2xl font-bold flex w-full justify-center">Skills</div>
       <span class="text-gray-600 text-sm">My recent skills...</span>
     </div>
-    <ul class="flex flex-wrap absolute mt-3">
+    <ul
+      class="flex mt-3 flex-wrap justify-content-center"
+      style="margin-bottom: 250px align-items-center; height: 80%"
+    >
       <li
         v-for="skill in skillcards"
         @click="clickSkillCard(skill.id)"
